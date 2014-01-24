@@ -7,13 +7,18 @@ from django_dev_mail.parser import ParseMessage
 
 
 @override_settings(EMAIL_FILE_PATH=os.path.dirname(__file__))
+@override_settings(TIME_ZONE='Europe/London')
 class ParserTests(TestCase):
+    '''
+        Overrides EMAIL_FILE_PATH and TIME_ZONE settings.
+    '''
+
     def setUp(self):
         self.test_message_filename = 'test_email.eml'
 
     def test_headers(self):
         """
-        Checks that expected dict of headers are retrieved and that the
+        Checks that expected dict of headers is retrieved and that the
         content matches the expected values.
         """
 
@@ -33,7 +38,7 @@ class ParserTests(TestCase):
 
     def test_body_parts(self):
         """
-        Checks that expected dict of mime parts are retrieved and that the
+        Checks that expected dict of mime parts is retrieved and that the
         content matches the expected values.
         """
 
@@ -63,6 +68,10 @@ class ParserTests(TestCase):
 
 @override_settings(EMAIL_FILE_PATH=os.path.dirname(__file__))
 class ViewTests(TestCase):
+    '''
+        Overrides EMAIL_FILE_PATH setting.
+    '''
+
     def setUp(self):
         self.test_message_filename = 'test_email.eml'
 
